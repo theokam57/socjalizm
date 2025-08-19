@@ -17,11 +17,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f7f3eb;
-      --ink:#151515;
+      --bg: #f7f3eb;             /* papier */
+      --ink:#151515;             /* tusz */
       --muted:#5c5c5c;
-      --red:#C5161D;
-      --red-deep:#8A0C12;
+      --red:#C5161D;             /* czerwony socjalistyczny */
+      --red-deep:#8A0C12;        /* ciemny odcień */
       --cream:#fff7e6;
       --card:#ffffff;
       --ring:rgba(197,22,29,.4);
@@ -50,8 +50,10 @@
       text-rendering:optimizeLegibility; -webkit-font-smoothing: antialiased;
     }
 
+    /* Pasek postępu przewijania */
     .progress{position:fixed; inset:0 0 auto 0; height:4px; background:linear-gradient(90deg,var(--red),var(--red-deep)); width:0; z-index:60}
 
+    /* Pasek nawigacji */
     .nav{
       position:sticky; top:0; z-index:50;
       background:linear-gradient(180deg, rgba(0,0,0,.08), transparent), var(--bg);
@@ -82,22 +84,42 @@
     .btn-primary{background:var(--red); color:#fff}
     .btn-ghost{background:transparent; color:var(--ink); outline:2px solid var(--ink)}
 
-    .hero{position:relative; overflow:hidden; border-bottom:1px solid rgba(0,0,0,.06)}
-    .hero-inner{max-width:var(--container); margin:0 auto; padding: clamp(28px, 6vw, 70px) 20px; position:relative; z-index:1}
+    /* HERO */
+    .hero{position:relative; overflow:hidden; border-bottom:none}
+    .hero-inner{max-width:var(--container); margin:0 auto; padding: clamp(28px, 6vw, 70px) 20px; position:relative; z-index:2}
     .kicker{font-weight:800; color:var(--red); text-transform:uppercase; letter-spacing:.15em}
     .title{font-family:'Bebas Neue', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; line-height:1; letter-spacing:.02em; margin:.2em 0}
     .title span{display:block}
     .title-large{font-size: clamp(44px, 10vw, 96px)}
     .subtitle{max-width:58ch; font-size:clamp(16px,2.2vw,20px); color:var(--muted)}
 
-    .hero-bg{z-index:0; pointer-events:none;}
+    /* Halftone/propaganda tło */
+    .hero-bg{
+      position:absolute; inset:auto -10% -30% -10%; height:60%;
+      background:
+        radial-gradient( circle at 15% 20%, rgba(197,22,29,.22) 0 12%, transparent 13% 100% ),
+        radial-gradient( circle at 45% 30%, rgba(197,22,29,.18) 0 10%, transparent 11% 100% ),
+        radial-gradient( circle at 75% 40%, rgba(197,22,29,.15) 0 8%, transparent 9% 100% ),
+        linear-gradient(180deg, var(--cream), transparent),
+        linear-gradient(90deg, var(--red) 0%, var(--red-deep) 100%);
+      transform:skewY(-6deg);
+      filter:saturate(120%);
+      z-index:0; pointer-events:none;
+    }
 
+    /* Miękkie wycięcie (łuk) na dole hero */
+    .hero-cut{position:absolute; left:0; right:0; bottom:-1px; height:96px; z-index:1; pointer-events:none}
+    .hero-cut svg{display:block; width:100%; height:100%}
+    .hero-cut path{fill:var(--bg)}
+
+    /* Wstęgi/nagłówki sekcji */
     .section{position:relative}
     .section-inner{max-width:var(--container); margin:0 auto; padding: clamp(40px, 6vw, 80px) 20px}
     .badge{display:inline-block; background:var(--ink); color:#fff; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.12em; text-transform:uppercase}
     .h2{font-family:'Bebas Neue', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: clamp(34px, 6vw, 56px); line-height:1; margin:.3em 0 .2em}
     .lead{font-size:18px; color:var(--muted); max-width:68ch}
 
+    /* Karty punktów programu */
     .grid{display:grid; gap:20px}
     @media (min-width: 720px){ .grid{grid-template-columns:repeat(2, 1fr);} }
     @media (min-width: 1024px){ .grid{grid-template-columns:repeat(3, 1fr);} }
@@ -109,21 +131,26 @@
     .list li{display:flex; gap:12px; margin:.5em 0}
     .list li:before{content:'★'; color:var(--red); flex:0 0 auto; font-size:18px; line-height:1.4}
 
+    /* Cytat/plakatowy akcent */
     .poster{background:linear-gradient(180deg, var(--red), var(--red-deep)); color:#fff; border-radius:var(--radius); padding:26px; box-shadow:var(--shadow)}
     .poster p{font-size:clamp(18px,2.4vw,22px); margin:0}
 
+    /* Sekcja wezwania */
     .cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:22px}
 
+    /* Stopka */
     footer{border-top:1px solid rgba(0,0,0,.08); background:linear-gradient(180deg, transparent, rgba(0,0,0,.04))}
     .foot{max-width:var(--container); margin:0 auto; padding: 26px 20px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap}
     .fine{color:var(--muted); font-size:14px}
 
+    /* Druk */
     @media print{
       .nav, .progress, .cta, .theme-toggle{display:none !important}
       .card{box-shadow:none; border:1px solid #000}
       body{background:#fff; color:#000}
     }
 
+    /* Preferencje ruchu */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .hero-bg{transform:none}
@@ -164,6 +191,11 @@
       </div>
     </div>
     <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-cut" aria-hidden="true">
+      <svg viewBox="0 0 1440 96" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+        <path d="M0,64 C320,0 1120,0 1440,64 L1440,96 L0,96 Z"></path>
+      </svg>
+    </div>
   </header>
 
   <main>
