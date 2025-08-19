@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Manifest Ideowy — Soclib Progresywny & Regionalizm Konserwatywny</title>
+  <title>Manifest Szymona Rokickiego — Soclib Progresywny & Regionalizm Konserwatywny</title>
   <meta name="description" content="Manifest ideowy łączący socjalliberalizm progresywny z regionalizmem konserwatywnym — gospodarka, prawa jednostki, ustrój, kultura, wizja przyszłości." />
   <meta name="theme-color" content="#C5161D" />
   <meta name="color-scheme" content="light dark" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Manifest Ideowy — Soclib Progresywny & Regionalizm Konserwatywny" />
+  <meta name="author" content="Szymon Rokicki" />
+  <meta property="og:title" content="Manifest Szymona Rokickiego — Soclib Progresywny & Regionalizm Konserwatywny" />
   <meta property="og:description" content="Nowoczesny manifest: wolny rynek z ludzką twarzą, prawa człowieka, decentralizacja i ochrona dziedzictwa regionalnego." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23C5161D'/><text x='50' y='350' font-size='120' fill='white' font-family='Bebas Neue, Arial'>MANIFEST</text></svg>" />
@@ -17,11 +18,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f7f3eb;             /* papier */
-      --ink:#151515;             /* tusz */
+      --bg: #f7f3eb;
+      --ink:#151515;
       --muted:#5c5c5c;
-      --red:#C5161D;             /* czerwony socjalistyczny */
-      --red-deep:#8A0C12;        /* ciemny odcień */
+      --red:#C5161D;
+      --red-deep:#8A0C12;
       --cream:#fff7e6;
       --card:#ffffff;
       --ring:rgba(197,22,29,.4);
@@ -50,10 +51,8 @@
       text-rendering:optimizeLegibility; -webkit-font-smoothing: antialiased;
     }
 
-    /* Pasek postępu przewijania */
     .progress{position:fixed; inset:0 0 auto 0; height:4px; background:linear-gradient(90deg,var(--red),var(--red-deep)); width:0; z-index:60}
 
-    /* Pasek nawigacji */
     .nav{
       position:sticky; top:0; z-index:50;
       background:linear-gradient(180deg, rgba(0,0,0,.08), transparent), var(--bg);
@@ -84,7 +83,6 @@
     .btn-primary{background:var(--red); color:#fff}
     .btn-ghost{background:transparent; color:var(--ink); outline:2px solid var(--ink)}
 
-    /* HERO */
     .hero{position:relative; overflow:hidden; border-bottom:none}
     .hero-inner{max-width:var(--container); margin:0 auto; padding: clamp(28px, 6vw, 70px) 20px; position:relative; z-index:2}
     .kicker{font-weight:800; color:var(--red); text-transform:uppercase; letter-spacing:.15em}
@@ -93,7 +91,6 @@
     .title-large{font-size: clamp(44px, 10vw, 96px)}
     .subtitle{max-width:58ch; font-size:clamp(16px,2.2vw,20px); color:var(--muted)}
 
-    /* Halftone/propaganda tło */
     .hero-bg{
       position:absolute; inset:auto -10% -30% -10%; height:60%;
       background:
@@ -107,19 +104,16 @@
       z-index:0; pointer-events:none;
     }
 
-    /* Miękkie wycięcie (łuk) na dole hero */
     .hero-cut{position:absolute; left:0; right:0; bottom:-1px; height:96px; z-index:1; pointer-events:none}
     .hero-cut svg{display:block; width:100%; height:100%}
     .hero-cut path{fill:var(--bg)}
 
-    /* Wstęgi/nagłówki sekcji */
     .section{position:relative}
     .section-inner{max-width:var(--container); margin:0 auto; padding: clamp(40px, 6vw, 80px) 20px}
-    .badge{display:inline-block; background:var(--ink); color:#fff; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.12em; text-transform:uppercase}
+    .badge{display:inline-block; background:var(--red); color:#fff; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.12em; text-transform:uppercase}
     .h2{font-family:'Bebas Neue', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: clamp(34px, 6vw, 56px); line-height:1; margin:.3em 0 .2em}
     .lead{font-size:18px; color:var(--muted); max-width:68ch}
 
-    /* Karty punktów programu */
     .grid{display:grid; gap:20px}
     @media (min-width: 720px){ .grid{grid-template-columns:repeat(2, 1fr);} }
     @media (min-width: 1024px){ .grid{grid-template-columns:repeat(3, 1fr);} }
@@ -131,26 +125,21 @@
     .list li{display:flex; gap:12px; margin:.5em 0}
     .list li:before{content:'★'; color:var(--red); flex:0 0 auto; font-size:18px; line-height:1.4}
 
-    /* Cytat/plakatowy akcent */
     .poster{background:linear-gradient(180deg, var(--red), var(--red-deep)); color:#fff; border-radius:var(--radius); padding:26px; box-shadow:var(--shadow)}
     .poster p{font-size:clamp(18px,2.4vw,22px); margin:0}
 
-    /* Sekcja wezwania */
     .cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:22px}
 
-    /* Stopka */
     footer{border-top:1px solid rgba(0,0,0,.08); background:linear-gradient(180deg, transparent, rgba(0,0,0,.04))}
     .foot{max-width:var(--container); margin:0 auto; padding: 26px 20px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap}
     .fine{color:var(--muted); font-size:14px}
 
-    /* Druk */
     @media print{
       .nav, .progress, .cta, .theme-toggle{display:none !important}
       .card{box-shadow:none; border:1px solid #000}
       body{background:#fff; color:#000}
     }
 
-    /* Preferencje ruchu */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .hero-bg{transform:none}
@@ -164,7 +153,7 @@
     <div class="nav-inner">
       <a class="brand" href="#start" aria-label="Powrót na początek">
         <span class="emblem" aria-hidden="true"></span>
-        <span class="brand-title">Manifest Ideowy</span>
+        <span class="brand-title">Szymon Rokicki</span>
       </a>
       <div class="nav-links" id="navLinks">
         <a href="#gospodarka">Gospodarka</a>
@@ -179,7 +168,7 @@
 
   <header class="hero" id="start">
     <div class="hero-inner">
-      <div class="kicker">program i wartości</div>
+      <div class="kicker">manifest i wartości</div>
       <h1 class="title title-large">
         <span>Socjalliberalizm Progresywny</span>
         <span>&amp; Regionalizm Konserwatywny</span>
@@ -199,12 +188,11 @@
   </header>
 
   <main>
-    <!-- Gospodarka i sprawy społeczne -->
     <section class="section" id="gospodarka">
       <div class="section-inner">
         <span class="badge">Rozdział I</span>
         <h2 class="h2">Gospodarka i sprawy społeczne</h2>
-        <p class="lead">Wspieramy przedsiębiorczość, innowacyjność i wzrost, jednocześnie dbając o sprawiedliwą redystrybucję i silne usługi publiczne.</p>
+        <p class="lead">Wspieram przedsiębiorczość, innowacyjność i wzrost, jednocześnie dbam o sprawiedliwą redystrybucję i silne usługi publiczne.</p>
         <div class="grid" role="list">
           <article class="card" role="listitem">
             <h3>Wolny rynek z ludzką twarzą</h3>
@@ -250,12 +238,11 @@
       </div>
     </section>
 
-    <!-- Społeczeństwo i prawa jednostki -->
     <section class="section" id="spoleczenstwo">
       <div class="section-inner">
         <span class="badge">Rozdział II</span>
         <h2 class="h2">Społeczeństwo i prawa jednostki</h2>
-        <p class="lead">Prawa człowieka, równość wobec prawa i świeckość państwa stanowią fundament nowoczesnego ładu społecznego.</p>
+        <p class="lead">Uważam, że prawa człowieka, równość wobec prawa i świeckość państwa to fundament nowoczesnego ładu społecznego.</p>
         <div class="grid" role="list">
           <article class="card" role="listitem">
             <h3>Prawa człowieka ponad wszystko</h3>
@@ -266,7 +253,7 @@
             </ul>
           </article>
           <article class="card" role="listitem">
-            <h3>Świeckie państwo</h3>
+            <h3>Świeckie <br> państwo</h3>
             <ul class="list">
               <li>Neutralność światopoglądowa instytucji publicznych.</li>
               <li>Przejrzystość relacji państwo–organizacje wyznaniowe.</li>
@@ -285,12 +272,11 @@
       </div>
     </section>
 
-    <!-- Regionalizm i ustrój -->
     <section class="section" id="ustroj">
       <div class="section-inner">
         <span class="badge">Rozdział III</span>
         <h2 class="h2">Regionalizm i ustrój</h2>
-        <p class="lead">Silne regiony, silne gminy i partycypacja obywatelska – władza bliżej ludzi, decyzje bliżej problemów.</p>
+        <p class="lead">Stawiam na silne regiony i gminy oraz realną partycypację – władza bliżej ludzi, decyzje bliżej problemów.</p>
         <div class="grid" role="list">
           <article class="card" role="listitem">
             <h3>Decentralizacja realna</h3>
@@ -324,12 +310,11 @@
       </div>
     </section>
 
-    <!-- Kultura i tożsamość -->
     <section class="section" id="kultura">
       <div class="section-inner">
         <span class="badge">Rozdział IV</span>
         <h2 class="h2">Kultura i tożsamość</h2>
-        <p class="lead">Nowoczesność zakorzeniona w tradycji: przyszłość budowana na fundamencie przeszłości.</p>
+        <p class="lead">Wyznaję zasadę nowoczesności zakorzenionej w tradycji – przyszłość budujemy na fundamencie przeszłości.</p>
         <div class="grid" role="list">
           <article class="card" role="listitem">
             <h3>Dziedzictwo jako zasób</h3>
@@ -359,12 +344,11 @@
       </div>
     </section>
 
-    <!-- Wizja przyszłości -->
     <section class="section" id="wizja">
       <div class="section-inner">
         <span class="badge">Rozdział V</span>
         <h2 class="h2">Wizja przyszłości</h2>
-        <p class="lead">Kraj nowoczesny, sprawiedliwy i otwarty: wolność jednostki połączona z odpowiedzialnością za wspólnotę.</p>
+        <p class="lead">Moja wizja: kraj nowoczesny, sprawiedliwy i otwarty – wolność jednostki połączona z odpowiedzialnością za wspólnotę.</p>
         <div class="grid">
           <article class="card">
             <h3>Skrót wizji</h3>
@@ -382,7 +366,6 @@
         </div>
         <div class="cta">
           <a class="btn btn-primary" href="#start">Wróć na początek</a>
-          <a class="btn btn-ghost" href="#ustroj">Zobacz regionalizm</a>
         </div>
       </div>
     </section>
@@ -390,19 +373,13 @@
 
   <footer>
     <div class="foot">
-      <div class="brand" aria-hidden="true">
-        <span class="emblem"></span>
-        <span class="brand-title">Manifest Ideowy</span>
-      </div>
-      <p class="fine">© <span id="year"></span> Manifest. Układ i styl inspirowane estetyką plakatów społecznych XX w. Wydanie do druku dostępne po użyciu skrótu <kbd>Ctrl</kbd> + <kbd>P</kbd>.</p>
+      <p class="fine">© <span id="year"></span> Szymon Rokicki.</p>
     </div>
   </footer>
 
   <script>
-    // Ustawienie roku
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Pasek postępu przewijania
     const progress = document.getElementById('progress');
     const onScroll = () => {
       const h = document.documentElement;
@@ -412,7 +389,6 @@
     document.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
 
-    // Scroll spy — aktywna sekcja w nawigacji
     const links = Array.from(document.querySelectorAll('#navLinks a'));
     const ids = links.map(a => a.getAttribute('href')).filter(h => h.startsWith('#'));
     const sections = ids.map(id => document.querySelector(id));
@@ -429,7 +405,6 @@
     document.addEventListener('scroll', spy, {passive:true});
     window.addEventListener('load', spy);
 
-    // Płynne przewijanie z kompensacją wysokości nawigacji dla starszych przeglądarek
     const navHeight = 64; // ~
     links.forEach(a => a.addEventListener('click', (e) => {
       const href = a.getAttribute('href');
@@ -442,7 +417,6 @@
       }
     }));
 
-    // Przełącznik motywu
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
     const storageKey = 'manifest-theme';
