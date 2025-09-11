@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>essa</title>
+    <title>Wideo z muzyką w tle</title>
     <style>
         html, body {
             margin: 0;
@@ -18,8 +18,14 @@
     </style>
 </head>
 <body>
-    <video autoplay loop>
+    <video autoplay loop muted>
         <source src="video.mp4" type="video/mp4">
+        Twoja przeglądarka nie obsługuje wideo.
     </video>
+
+    <audio autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+        Twoja przeglądarka nie obsługuje audio.
+    </audio>
 </body>
 </html>
