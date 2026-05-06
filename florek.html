@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Lelów</title>
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0f;
+  color: white;
+  overflow-x: hidden;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: white;
+  z-index: 999;
+}
+
+section {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero {
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  opacity: 0.6;
+  font-size: 1.2rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: white;
+  margin-left: 6px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: 900px;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(80px);
+
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.content h2 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.content p {
+  opacity: 0.6;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #1a1a2a, #05050a);
+  transform: scale(1.2);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg.alt {
+  background: radial-gradient(circle at center, #0c1a1f, #05060a);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<section class="hero">
+  <div>
+    <h1>
+      <span id="type"></span><span class="cursor"></span>
+    </h1>
+    <p>Scroll to explore system</p>
+  </div>
+</section>
+
+<section>
+  <div class="bg"></div>
+  <div class="sticky">
+    <div class="content">
+      <h2>Lelów</h2>
+      <p>Moja mała ojczyzna</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="bg alt"></div>
+  <div class="sticky">
+    <div class="content">
+      <h2>Partia Razem</h2>
+      <p>Pole do działania</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="bg"></div>
+  <div class="sticky">
+    <div class="content">
+      <h2>LTHK</h2>
+      <p>Przełożenie miłości na rzeczywistość</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sticky">
+    <div class="content" style="opacity:1; transform:none;">
+      <h2>To jeszcze nie koniec</h2>
+      <p>Pozdrawiam</p>
+    </div>
+  </div>
+</section>
+
+<script>
+
+const progressBar = document.getElementById("progress");
+const sections = document.querySelectorAll("section");
+
+const texts = [
+  "Szymon Rokicki.",
+  "Historia, regionalizm, polityka.",
+  "Badam, tworzę, działam."
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+const el = document.getElementById("type");
+
+const speed = 80;
+const deleteSpeed = 40;
+const pause = 1500;
+
+function type() {
+  const current = texts[textIndex];
+
+  if (!isDeleting) {
+    el.textContent = current.substring(0, charIndex++);
+  } else {
+    el.textContent = current.substring(0, charIndex--);
+  }
+
+  let delay = isDeleting ? deleteSpeed : speed;
+
+  if (!isDeleting && charIndex === current.length) {
+    delay = pause;
+    isDeleting = true;
+  }
+
+  if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    textIndex = (textIndex + 1) % texts.length;
+  }
+
+  setTimeout(type, delay);
+}
+
+type();
+
+
+let current = 0;
+let target = 0;
+
+function updateScroll() {
+  target = window.scrollY;
+
+  const diff = target - current;
+  current += diff * 0.1; // smoothing (klucz Apple-like feel)
+
+  const docH = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (current / docH) * 100 + "%";
+
+  sections.forEach(section => {
+
+    const rect = section.getBoundingClientRect();
+    const center = window.innerHeight / 2;
+    const distance = rect.top - center;
+
+    const content = section.querySelector(".content");
+    const bg = section.querySelector(".bg");
+
+    if (!content || !bg) return;
+
+    const p = Math.max(0, Math.min(1, 1 - Math.abs(distance) / 500));
+
+    /* ===== SMOOTH CONTENT ===== */
+    content.style.opacity = p;
+    content.style.transform = `translateY(${(1 - p) * 80}px)`;
+
+    /* ===== SMOOTH BACKGROUND ===== */
+    bg.style.transform = `scale(${1.2 - p * 0.2}) translateY(${distance * 0.03}px)`;
+
+  });
+
+  requestAnimationFrame(updateScroll);
+}
+
+updateScroll();
+
+</script>
+
+</body>
+</html>
